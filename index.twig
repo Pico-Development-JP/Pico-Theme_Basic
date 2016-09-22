@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{% if meta.title %}{{ meta.title }} | {% endif %}{{ site_title }}</title>
+  {% if config.description %}
+    <meta name="description" content="{{ config.description }}">
+  {% endif %}
+  {% if meta.robots %}
+    <meta name="robots" content="{{ meta.robots }}">
+  {% endif %}
+  <base url="{{ base_url}}"/>
+  <meta name="generator" content="PicoCMS {{version}}">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{{ theme_url }}/honoka/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ theme_url }}/index.css" rel="stylesheet">
+</head>
+<body id="i{{ page.id|replace({'/': ''}) }}">
+  <div class="container-fluid" id="start">
+    <div class="jumbotron">
+      <header>
+        <h1>
+          {% if meta.title %}{{ meta.title }}{% else %}{{ site_title }}{% endif %}
+        </h1>
+        <div>
+          {{ meta.description }}
+        </div>
+      </header>
+    </div>
+    {% if breadcrumbs %}
+      <ol class="breadcrumb" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+        {% if config.breadcrumbs_backsite %}
+          <li>
+            <a href="{{config.breadcrumbs_backsite.url}}" itemprop="url">
+              <span itemprop="title">{{config.breadcrumbs_backsite.title}}</span>
+            </a>
+          </li>
+        {% endif %}
+        <li><a href="/" itemprop="url"><span itemprop="title">{{ site_title }}</span></a></li>
+        {% for crumb in breadcrumbs %}
+          <li itemprop="child"{% if loop.last %} class="active"{% endif %} itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+            {% if loop.last %}
+              <span itemprop="title">{{ crumb.name }}</span>
+            {% else %}
+              <a href="{{ crumb.url }}" itemprop="url"><span itemprop="title">{{ crumb.name }}</span></a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ol>
+    {% endif %}
+
+    <section class="contents clearfix">
+      {% if content %}
+        <h2 class="hidden">記事</h2>
+        <section class="single-article">
+          <article class="panel panel-default">
+            <div class="panel-body">
+              {{ content }}
+              {% if current_page.meta.download %}
+                <a href="{{current_page.meta.download}}" class="btn btn-primary">ダウンロードページへ</a>
+              {% endif %}
+            </div>
+          </article>
+        </section>
+      {% endif %}
+
+      {% if current_page.id ends with 'index' %}
+        <h2 class="hidden">サブコンテンツ</h2>
+        <section class="subdirectory">
+          {% for page in dir_pages if page.title != "" %}
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <article class="panel panel-default" id="i{{ page.id|replace({'/': ''}) }}">
+                <div class="panel-heading">
+                  <h3><a href="{{page.url}}">{{ page.title }}</a></h3>
+                </div>
+                <div class="panel-body">
+                  {{ page.description }}
+                  {% if page.meta.download %}
+                    <a href="{{page.meta.download}}" class="btn btn-primary">ダウンロードページへ</a>
+                  {% endif %}
+                </div>
+              </article>
+            </div>
+            {% if loop.index % 2 == 0 %}
+              <div class="clearfix visible-sm"></div>
+            {% endif %}
+            {% if loop.index % 3 == 0 %}
+              <div class="clearfix visible-md visible-lg"></div>
+            {% endif %}
+          {% endfor %}
+        </section>
+      {% endif %}
+    </section>
+    <footer class="panel panel-default">
+      <a href="#start">このページの先頭へ</a>
+      <p>{{ config.copyright }}</p>
+    </footer>
+  </div>
+
+</body>
+</html>
