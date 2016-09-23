@@ -18,6 +18,7 @@
 </head>
 <body id="i{{ page.id|replace({'/': ''}) }}">
   <div class="container-fluid" id="start">
+    <!-- ヘッダー -->
     <div class="jumbotron">
       <header>
         <h1>
@@ -28,8 +29,11 @@
         </div>
       </header>
     </div>
+
+    <!-- パンくずリスト -->
     {% if breadcrumbs %}
       <ol class="breadcrumb" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+        <!-- パンくずリスト/バックサイト -->
         {% if config.breadcrumbs_backsite %}
           <li>
             <a href="{{config.breadcrumbs_backsite.url}}" itemprop="url">
@@ -51,6 +55,7 @@
     {% endif %}
 
     <section class="contents clearfix">
+      <!-- 記事 -->
       {% if content %}
         <h2 class="hidden">記事</h2>
         <section class="single-article">
@@ -65,6 +70,7 @@
         </section>
       {% endif %}
 
+      <!-- サブディレクトリ内容(indexのみ) -->
       {% if current_page.id ends with 'index' %}
         <h2 class="hidden">サブコンテンツ</h2>
         <section class="subdirectory">
@@ -92,6 +98,8 @@
         </section>
       {% endif %}
     </section>
+    
+    <!-- フッター -->
     <footer class="panel panel-default">
       <a href="#start">このページの先頭へ</a>
       <p>{{ config.copyright }}</p>
