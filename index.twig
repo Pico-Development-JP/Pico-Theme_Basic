@@ -69,6 +69,7 @@
           {% endif %}
           <article class="panel panel-default">
             <div class="panel-body">
+              <p class="lastupdate">記事更新日：{{meta.time|date("Y年m月d日")}}</p>
               {{ content }}
               {% if current_page.meta.download %}
                 <a href="{{current_page.meta.download}}" class="btn btn-primary">ダウンロードページへ</a>
@@ -109,6 +110,7 @@
     
     <!-- フッター -->
     <footer class="panel panel-default">
+      <p class="lastupdate">この記事の最終更新日：{{meta.time|date("Y年m月d日")}}</p>
       <a href="#start">このページの先頭へ</a>
       <p>{{ config.copyright }}</p>
     </footer>
