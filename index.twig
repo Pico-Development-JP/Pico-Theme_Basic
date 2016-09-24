@@ -59,6 +59,14 @@
       {% if content %}
         <h2 class="hidden">記事</h2>
         <section class="single-article">
+          {% if TOC %}
+            <div class="toc panel panel-info">
+              <h3 class="panel-heading">もくじ</h3>
+              <div class="panel-body">
+                {{TOC}}
+              </div>
+            </div>
+          {% endif %}
           <article class="panel panel-default">
             <div class="panel-body">
               {{ content }}
