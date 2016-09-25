@@ -21,3 +21,6 @@
 ## 対応しているプラグイン(テーマにはこのプラグインに関する記述があります。一緒に使うことを推奨します)
 
  * [pico-breadcrumbsプラグイン](https://github.com/TakamiChie/pico-breadcrumbs)
+ * [pico-timestampプラグイン](https://github.com/TakamiChie/pico-timestamp)
+ * [pico-tocプラグイン](https://github.com/TakamiChie/pico-toc)
+ 
