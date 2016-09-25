@@ -87,7 +87,14 @@
             <div class="col-md-4 col-sm-6 col-xs-12">
               <article class="panel panel-default" id="i{{ page.id|replace({'/': ''}) }}">
                 <div class="panel-heading">
-                  <h3><a href="{{page.url}}">{{ page.title }}</a></h3>
+                  <h3>
+                    <a href="{{page.url}}">
+                      {{ page.title }}
+                    </a>
+                    <span class="lastupdate">
+                      ({{page.fileupdate|date("m月d日")}}更新)
+                    </span>
+                  </h3>
                 </div>
                 <div class="panel-body">
                   {{ page.description }}
@@ -108,9 +115,32 @@
       {% endif %}
     </section>
     
+    {% if dir_paginate and dir_paginate.enabled %}
+      <nav>
+        <ul class="pagination">
+          {% if dir_paginate.hasprev %}
+            <li><a href="{{ dir_paginate.prevurl }}">前のページへ</a></li>
+          {% endif %}
+          {% for i in range(1, dir_paginate.pagemax) %}
+            {% if dir_paginate.pageindex == i %}
+              <li class="active"><a href="#">{{ i }}</a></li>
+            {% else %}
+              <li>
+                <a href="{{ i }}">
+                  {{ i }}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          {% if dir_paginate.hasnext %}
+            <li><a href="{{ dir_paginate.nexturl }}">次のページへ</a></li>
+          {% endif %}
+        </ul>
+      </nav>      
+    {% endif %}
     <!-- フッター -->
     <footer class="panel panel-default">
-      <p class="lastupdate">この記事の最終更新日：{{meta.time|date("Y年m月d日")}}</p>
+      <p class="lastupdate">この記事の最終更新日：{{current_page.fileupdate|date("Y年m月d日")}}</p>
       <a href="#start">このページの先頭へ</a>
       <p>{{ config.copyright }}</p>
       {{ config.footer }}
