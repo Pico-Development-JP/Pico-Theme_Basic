@@ -112,32 +112,35 @@
             {% endif %}
           {% endfor %}
         </section>
+        
+        <!-- ページネーション -->
+        {% if dir_paginate and dir_paginate.enabled %}
+          <nav>
+            <ul class="pagination">
+              {% if dir_paginate.hasprev %}
+                <li><a href="{{ dir_paginate.prevurl }}">前のページへ</a></li>
+              {% endif %}
+              {% for i in range(1, dir_paginate.pagemax) %}
+                {% if dir_paginate.pageindex == i %}
+                  <li class="active"><a href="#">{{ i }}</a></li>
+                {% else %}
+                  <li>
+                    <a href="{{ i }}">
+                      {{ i }}
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+              {% if dir_paginate.hasnext %}
+                <li><a href="{{ dir_paginate.nexturl }}">次のページへ</a></li>
+              {% endif %}
+            </ul>
+          </nav>      
+        {% endif %}
+
       {% endif %}
     </section>
-    
-    {% if dir_paginate and dir_paginate.enabled %}
-      <nav>
-        <ul class="pagination">
-          {% if dir_paginate.hasprev %}
-            <li><a href="{{ dir_paginate.prevurl }}">前のページへ</a></li>
-          {% endif %}
-          {% for i in range(1, dir_paginate.pagemax) %}
-            {% if dir_paginate.pageindex == i %}
-              <li class="active"><a href="#">{{ i }}</a></li>
-            {% else %}
-              <li>
-                <a href="{{ i }}">
-                  {{ i }}
-                </a>
-              </li>
-            {% endif %}
-          {% endfor %}
-          {% if dir_paginate.hasnext %}
-            <li><a href="{{ dir_paginate.nexturl }}">次のページへ</a></li>
-          {% endif %}
-        </ul>
-      </nav>      
-    {% endif %}
+
     <!-- フッター -->
     <footer class="panel panel-default">
       <p class="lastupdate">この記事の最終更新日：{{current_page.fileupdate|date("Y年m月d日")}}</p>
