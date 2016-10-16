@@ -82,7 +82,7 @@
       <!-- サブディレクトリ内容(indexのみ) -->
       {% if current_page.id ends with 'index' %}
         <h2 class="hidden">サブコンテンツ</h2>
-        <section class="subdirectory">
+        <section class="subdirectory clearfix">
           {% for page in dir_pages if page.title != "" %}
             <div class="col-md-4 col-sm-6 col-xs-12">
               <article class="panel panel-default" id="i{{ page.id|replace({'/': ''}) }}">
