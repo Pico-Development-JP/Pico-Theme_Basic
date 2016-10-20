@@ -70,9 +70,14 @@
           <article class="panel panel-default">
             <div class="panel-body">
               <p class="lastupdate">記事更新日：{{meta.time|date("Y年m月d日")}}</p>
-              {{ content }}
+              <div class="content">
+                {{ content }}
+              </div>
               {% if current_page.meta.download %}
-                <a href="{{current_page.meta.download}}" class="btn btn-primary">ダウンロードページへ</a>
+                <div class="download">
+                  <h3>ダウンロード</h3>
+                  <a href="{{current_page.meta.download}}" class="btn btn-primary">ダウンロードページへ</a>
+                </div>
               {% endif %}
             </div>
           </article>
@@ -99,9 +104,13 @@
                   </h3>
                 </div>
                 <div class="panel-body">
-                  {{ page.description }}
+                  <div class="content">
+                    {{ page.description }}
+                  </div>
                   {% if page.meta.download %}
-                    <a href="{{page.meta.download}}" class="btn btn-primary">ダウンロードページへ</a>
+                    <div class="download">
+                      <a href="{{page.meta.download}}" class="btn btn-primary">ダウンロードページへ</a>
+                    </div>
                   {% endif %}
                 </div>
               </article>
